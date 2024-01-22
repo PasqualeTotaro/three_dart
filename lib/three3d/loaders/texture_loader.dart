@@ -42,10 +42,9 @@ class TextureLoader extends Loader {
 
       // Web better way ???
       if (kIsWeb && image is! Image) {
-        imageElement = ImageElement(
-            url: url is Blob ? "" : url, data: image, width: image.width!.toDouble(), height: image.height!.toDouble());
+        imageElement = ImageElement(url: url is Blob ? "" : url, data: image, width: image.width!.toDouble(), height: image.height!.toDouble());
       } else {
-        var pixels = image.getBytes(format: Format.rgba);
+        var pixels = image.getBytes(format: Format.uint32);
 
         // print(" _pixels : ${_pixels.length} ");
         // print(" ------------------------------------------- ");

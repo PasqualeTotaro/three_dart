@@ -62,13 +62,7 @@ class _State extends State<MiscAnimationKeys> {
 
     three3dRender = FlutterGlPlugin();
 
-    Map<String, dynamic> options = {
-      "antialias": true,
-      "alpha": false,
-      "width": width.toInt(),
-      "height": height.toInt(),
-      "dpr": dpr
-    };
+    Map<String, dynamic> options = {"antialias": true, "alpha": false, "width": width.toInt(), "height": height.toInt(), "dpr": dpr};
 
     await three3dRender.initialize(options: options);
 
@@ -127,9 +121,7 @@ class _State extends State<MiscAnimationKeys> {
                 color: Colors.black,
                 child: Builder(builder: (BuildContext context) {
                   if (kIsWeb) {
-                    return three3dRender.isInitialized
-                        ? HtmlElementView(viewType: three3dRender.textureId!.toString())
-                        : Container();
+                    return three3dRender.isInitialized ? HtmlElementView(viewType: three3dRender.textureId!.toString()) : Container();
                   } else {
                     return three3dRender.isInitialized ? Texture(textureId: three3dRender.textureId!) : Container();
                   }
@@ -166,13 +158,7 @@ class _State extends State<MiscAnimationKeys> {
   }
 
   initRenderer() {
-    Map<String, dynamic> options = {
-      "width": width,
-      "height": height,
-      "gl": three3dRender.gl,
-      "antialias": true,
-      "canvas": three3dRender.element
-    };
+    Map<String, dynamic> options = {"width": width, "height": height, "gl": three3dRender.gl, "antialias": true, "canvas": three3dRender.element};
     renderer = three.WebGLRenderer(options);
     renderer!.setPixelRatio(dpr);
     renderer!.setSize(width, height, false);
@@ -234,25 +220,11 @@ class _State extends State<MiscAnimationKeys> {
     var quaternionKF = three.QuaternionKeyframeTrack(
         '.quaternion',
         [0, 1, 2],
-        [
-          qInitial.x,
-          qInitial.y,
-          qInitial.z,
-          qInitial.w,
-          qFinal.x,
-          qFinal.y,
-          qFinal.z,
-          qFinal.w,
-          qInitial.x,
-          qInitial.y,
-          qInitial.z,
-          qInitial.w
-        ],
+        [qInitial.x, qInitial.y, qInitial.z, qInitial.w, qFinal.x, qFinal.y, qFinal.z, qFinal.w, qInitial.x, qInitial.y, qInitial.z, qInitial.w],
         null);
 
     // COLOR
-    var colorKF =
-        three.ColorKeyframeTrack('.material.color', [0, 1, 2], [1, 0, 0, 0, 1, 0, 0, 0, 1], three.InterpolateDiscrete);
+    var colorKF = three.ColorKeyframeTrack('.material.color', [0, 1, 2], [1, 0, 0, 0, 1, 0, 0, 0, 1], three.InterpolateDiscrete);
 
     // OPACITY
     var opacityKF = three.NumberKeyframeTrack('.material.opacity', [0, 1, 2], [1, 0, 1], null);
